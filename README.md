@@ -1,12 +1,14 @@
 # Proyecto de ingenieria de software 1
+# Mi Familia EC
+
 
 Integrantes:
 * Luis Carrasco
 * Christian Guerrero
 * Leonardo Mendoza
 
-## Frameworks utilizados
+## Frameworks
 ```
-Frontend usado Angular >10
-Backend usado Django
+Frontend: Angular V10 and Ionic
+Backend: Django
 ```
