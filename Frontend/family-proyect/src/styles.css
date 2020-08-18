@@ -496,10 +496,11 @@ textarea:focus {
     .header-area .faith-main-menu .classynav .search-btn {
       width: 160px;
       text-align: center;
-      display: inline-block;
+      display: list-item;
       height: 80px;
       line-height: 80px;
       cursor: pointer;
+      list-style: none;
       -webkit-transition: all 500ms;
       transition: all 500ms; }
       .header-area .faith-main-menu .classynav .search-btn:hover {
