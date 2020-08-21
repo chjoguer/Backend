@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import *
 from django.contrib.auth.admin import UserAdmin
+from .models import UserProfile
+from .models import *
 
 # Register your models here.
-#admin.site.register(customUser, UserAdmin)
+admin.site.register(UserProfile, UserAdmin)
+admin.site.register(Cart)

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
 MIDDLEWARE = [
@@ -49,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-#AUTH_USER_MODEL = 'family_admin.customUser'
+AUTH_USER_MODEL = 'family.UserProfile'
 
 ROOT_URLCONF = 'family_admin.urls'
 
