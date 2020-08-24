@@ -1,18 +1,79 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login, logout
 from .models import UserProfile
-
+from .models import *
+from django.contrib import messages
 # Create your views here.
 
 def content(request):
     return render(request, 'views/contenido.html')
+
+
+def vista_buzon_entrada(request):
+    return render(request, 'notificaciones/buzon_entrada.html')
+
+
+
+def vista_registrar_tema(request):
+    categorias = Categoria_Tema.objects.all()
+    if(request.method == 'POST'):
+        try:
+            #Esteado enum 1:Aprobado, 2:Pendiente
+            tema = Tema(estado=request.POST['estado'],
+                        titulo=request.POST['titulo'],
+                        descripcion=request.POST['descripcion'],
+                        )
+            if request.POST['fecha'] != '' :
+                tema.fecha=request.POST['fecha']   
+
+            tema.save()
+
+            #Esta podria ser la imagen que se muestra en el index del portal web
+            imagen_tema_1 = Imagenes_Tema(id_tema=tema)
+            imagen_tema_1.image = request.FILES['imagen1']
+            imagen_tema_1.save()
+            #Esta podria ser la imagen que se muestra una vez que le de click en el tema
+            imagen_tema_2 = Imagenes_Tema(id_tema=tema)
+            imagen_tema_2.image = request.FILES['imagen2']
+            imagen_tema_2.save()
+
+            #Video: Este se muestra una vez que entre en el tema
+            vide_tema = Videos_Tema(id_tema=tema)
+            vide_tema.video = request.FILES['video']
+            vide_tema.save()
+
+
+            #Que suba audio podria ser opcional (Casi a nadie le gusta estar oyendo audio de internet)
+            messages.add_message(request, messages.SUCCESS, 'Tema guardado exitosamente.')
+        except Exception as e :
+            print("Errors -> ", e)
+            messages.add_message(request,messages.ERROR,'Error al guardar el tema.')
+
+        return redirect('registrar_tema') #registrar_tema es la version corta de views/registros/registrar_tema.html
+
+    return render(request, 'views/registros/registrar_tema.html',{'categorias':categorias,"estado":Tema.Estado})
+
+
+def view_modificar_tema(request):
+    All_temas = Tema.objects.all()
+    categorias = Categoria_Tema.objects.all()
+
+
+    return render(request, 'views/modificaciones/modificar_tema.html',{'temas':All_temas,'categorias':categorias,"estado":Tema.Estado})
+
+
+
+
+
+
+
 
 def signup(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
-        #Con esto crean los tipos de usarios mientras tanto para que vatan probando los diferentes tipos de usuarios
+        #Con esto crean los tipos de usarios mientras tanto para que vayan probando los diferentes tipos de usuarios
         #new = UserProfile.objects.create_user('john', 'lennon@thebeatles.com', '23198')
         #new.tipo = "A"
         #new.save()
@@ -27,14 +88,12 @@ def signup(request):
                     pass
                 except expression as identifier:
                     pass
-
                 if usuario.tipo == "E": #Editor
                     return redirect('index')
                 elif usuario.tipo == "A": #Administrador
                     return redirect('index')
                 elif usuario.tipo == "C": #Consejero
                     return redirect('index')
-
             else:
                 # Return a 'disabled account' error message
                 return render(request, 'views/login.html', {})
