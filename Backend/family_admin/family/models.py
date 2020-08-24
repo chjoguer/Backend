@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+from datetime import datetime    
 
 # Create your models here.
 
@@ -9,14 +10,49 @@ from django.conf import settings
 
 
 class UserProfile(AbstractUser):
-    customer_id = models.CharField(max_length=100, blank=True, null=True)
     tipo = models.CharField(max_length=2,null=False,blank=False,default='E',verbose_name='Tipos de usuario')# A:administrador, E: editor, C: consejero
 
     def say_hello(self):
         return "Hello, my name is {}".format(self.first_name)
+    
+    def __str__(self):           
+        return self.username  
 
 
-class Cart(models.Model):
-   user = models.ForeignKey(
-                settings.AUTH_USER_MODEL,
-                null=True, blank=True, on_delete=models.CASCADE)
+class Tema(models.Model):
+    #Enum
+    class Estado(models.IntegerChoices):
+        REVISADO = 1
+        PENDIENTE = 2
+    
+    id_tema = models.AutoField(primary_key=True)
+    estado = models.IntegerField(choices=Estado.choices)
+    titulo = models.CharField(max_length=100,null=False,blank=False,verbose_name="Titulo del tema")
+    descripcion = models.TextField(max_length="900",null=False,blank=True,verbose_name="Descripcion del tema")
+    fecha= models.DateField(null=False, blank=True, default=datetime.now)
+
+    def __str__(self):              
+        return self.titulo
+
+class Categoria_Tema(models.Model):
+    id_categoria_tema=models.AutoField(primary_key=True)
+    nombre_categoria = models.CharField(max_length=200,null=False,blank=True,verbose_name="Nombre de la categoria")
+    id_tema = models.ForeignKey(Tema,on_delete=models.CASCADE,null=True,blank=True)
+    
+    def __str__(self):              
+        return self.nombre_categoria
+
+ 
+class Imagenes_Tema(models.Model):
+    image = models.ImageField(upload_to='image/',null=False,blank=True,verbose_name="Imagen del tema")
+    id_tema = models.ForeignKey(Tema, on_delete=models.CASCADE)
+
+class Videos_Tema(models.Model):
+    
+    video = models.FileField(upload_to="video/",null=False,blank=True,verbose_name="Video del tema")
+    id_tema = models.ForeignKey(Tema, on_delete=models.CASCADE)
+    
+
+class Audio_Tema(models.Model):
+    audio = models.FileField(upload_to="audio/",null=False,blank=True,verbose_name="Audio del tema")
+    id_tema = models.ForeignKey(Tema, on_delete=models.CASCADE)

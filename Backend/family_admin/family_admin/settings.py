@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+#Registro mi propia tabla de registros de usuario
 AUTH_USER_MODEL = 'family.UserProfile'
 
 ROOT_URLCONF = 'family_admin.urls'
@@ -78,8 +79,12 @@ WSGI_APPLICATION = 'family_admin.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dbfamily',
+	    'USER': 'root',
+	    'PASSWORD': '23198',
+	    'HOST': 'localhost',
+	    'PORT': '3306',
     }
 }
 
@@ -129,3 +134,6 @@ TEMPLATE_DIRS = (
 
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
