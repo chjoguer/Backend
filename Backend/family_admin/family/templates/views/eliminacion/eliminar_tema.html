@@ -56,14 +56,12 @@
                         <td>Pendiente</td>
                         {% endif %}
                         <td>{{tema.id_tema}}</td>
-                        <td><a href="#" class="btn btn-success btn-circle btn-sm">
+                        <td><a href="{% url 'modificar_tema_pk' tema.id_tema %}" class="btn btn-success btn-circle btn-sm">
                                 <i class="fas fa-pen"></i>
                             </a>
                             <a href="{% url 'eliminar_tema_pk' tema.id_tema %}" class="btn btn-danger btn-circle btn-sm">
                                 <i class="fas fa-trash"></i>
                             </a>
-
-
                         </td>
 
                     </tr>

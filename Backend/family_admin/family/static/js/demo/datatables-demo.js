@@ -18,22 +18,22 @@ $(document).ready(function() {
   } );
 } );
 
-// $(document).ready(function() {
-//     // messages timeout for 10 sec 
-//     setTimeout(function() {
-//         $('.message').fadeOut('slow');
-//     }, 10000); // <-- time in milliseconds, 1000 =  1 sec
+ $(document).ready(function() {
+     // messages timeout for 10 sec 
+     setTimeout(function() {
+         $('.message').fadeOut('slow');
+     }, 3000); // <-- time in milliseconds, 1000 =  1 sec
 
 //     // delete message
-//     $('.del-msg').live('click',function(){
-//         $('.del-msg').parent().attr('style', 'display:none;');
-//     })
-// });
+     $('.del-msg').live('click',function(){
+         $('.del-msg').parent().attr('style', 'display:none;');
+     })
+ });
 
-var count_image = 0;
+var count_image = 1;
 $('#addimg').click(function(){
     var div_image    = $('#image');
-    if(count_image<3){
+    if(count_image<4){
         var clone = div_image.clone();
         var child = clone.children();
         child.children().attr('id',count_image);
@@ -41,15 +41,15 @@ $('#addimg').click(function(){
         // clone.find(':text').val('');
         // clone.find('[type=number]').val('');
         // clone.attr('value', parseInt(clone.attr('value'))+1);
-        $('#image').before(clone);
+        $('#image').after(clone);
         count_image++;
     }
 });
 
-var count_video = 0;
+var count_video = 1;
 $('#addvideo').click(function(){
     var div_video    = $('#video');
-    if(count_video<3){
+    if(count_video<4){
         var clone = div_video.clone();
         var child = clone.children();
         child.children().attr('id',count_video);
@@ -59,7 +59,7 @@ $('#addvideo').click(function(){
         // clone.find(':text').val('');
         // clone.find('[type=number]').val('');
         // clone.attr('value', parseInt(clone.attr('value'))+1);
-        $('#video').before(clone);
+        $('#video').after(clone);
         count_video++;
     }
 });

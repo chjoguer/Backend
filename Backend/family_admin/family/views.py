@@ -8,6 +8,8 @@ from django.contrib import messages
 def content(request):
     return render(request, 'views/contenido.html')
 
+def view_eliminar_galeria(request):
+    return render(request, 'views/galeria/eliminar_galeria.html')
 
 def vista_buzon_entrada(request):
     return render(request, 'notificaciones/buzon_entrada.html')
