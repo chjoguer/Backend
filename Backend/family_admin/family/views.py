@@ -57,14 +57,49 @@ def vista_registrar_tema(request):
 def view_modificar_tema(request):
     All_temas = Tema.objects.all()
     categorias = Categoria_Tema.objects.all()
-
-
     return render(request, 'views/modificaciones/modificar_tema.html',{'temas':All_temas,'categorias':categorias,"estado":Tema.Estado})
 
+def modificar_tema(request,pk):
+    All_temas = Tema.objects.all()
+    categorias = Categoria_Tema.objects.all()
+    try:
+        tema = Tema.objects.get(id_tema=pk)
+        if request.method == 'POST':
+            print(5)
+
+    except Exception as e:
+        print(e)
+
+    return render(request, 'views/modificaciones/modificar_tema.html',{'temas':All_temas,'categorias':categorias,"estado":Tema.Estado,'tema':tema})
 
 
+def view_eliminar_tema(request):
+    All_temas = Tema.objects.all()
+    categorias = Categoria_Tema.objects.all()
+    return render(request, 'views/eliminacion/eliminar_tema.html',{'temas':All_temas,'categorias':categorias,"estado":Tema.Estado})
+
+def eliminar_tema(request,pk):
+    try:
+        print(pk)
+        tema = Tema.objects.get(id_tema=pk)
+        imagenes = Imagenes_Tema.objects.filter(id_tema=tema.id_tema)
+        for imagen in imagenes:
+            imagenes.delete()
+        videos = Videos_Tema.objects.filter(id_tema=tema)
+        videos.delete()
+        tema.delete()
+        print(imagenes)
+        messages.add_message(request, messages.SUCCESS, 'Tema eliminado exitosamente.')
+    except Exception as e:
+        print(e)
+        messages.add_message(request,messages.ERROR,'Error al eliminar el tema.')
+
+    categorias = Categoria_Tema.objects.all()
+    return redirect('eliminar_tema')
 
 
+def view_galeria(request):
+        return render(request, 'views/galeria/view_galeria.html')
 
 
 

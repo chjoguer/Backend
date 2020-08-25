@@ -551,6 +551,8 @@ pre code {
   padding-left: 0.75rem;
   margin-right: auto;
   margin-left: auto;
+  margin-top: 5%;
+
 }
 
 @media (min-width: 576px) {
@@ -10803,7 +10805,7 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+  background: url("../img/familia.jpg");
   background-position: center;
   background-size: cover;
 }

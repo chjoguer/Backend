@@ -1,0 +1,78 @@
+{% extends "views/index.html" %}
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+    {% if message.tags == "success" %}
+      <div class="card mb-4 py-3 border-left-success message">
+              <div class="card-body ">
+                {{ message }}<a class="del-msg">&times;</a> 
+          </div>
+    </div>
+    {% else %}
+      <div class="card mb-4 py-3 border-left-danger message">
+          <div class="card-body ">
+               <span> {{ message }}</span><a class="del-msg">&times;</a> 
+          </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        <span class="m-0 font-weight-bold text-primary">Temas publicados</span>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Tema</th>
+                        <th>Estado</th>
+                        <th>ID</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Tema</th>
+                        <th>Estado</th>
+                        <th>ID</th>
+                        <th>Opciones</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for tema in temas%}
+                    <tr>
+                        <td>{{tema.fecha}}</td>
+                        <td>{{tema.titulo}}</td>
+                        {% if tema.estado == 1%}
+                        <td>Aprobado</td>
+                        {% else %}
+                        <td>Pendiente</td>
+                        {% endif %}
+                        <td>{{tema.id_tema}}</td>
+                        <td><a href="#" class="btn btn-success btn-circle btn-sm">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                            <a href="{% url 'eliminar_tema_pk' tema.id_tema %}" class="btn btn-danger btn-circle btn-sm">
+                                <i class="fas fa-trash"></i>
+                            </a>
+
+
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+
+
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock  %}

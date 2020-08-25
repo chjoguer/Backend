@@ -70,7 +70,7 @@
                                     <td>Pendiente</td>
                                     {% endif %}
                                     <td>{{tema.id_tema}}</td>
-                                    <td><a href="#" class="btn btn-success btn-circle">
+                                    <td><a href="{% url 'modificar_tema' tema.id_tema %}" class="btn btn-success btn-circle btn-sm">
                                         <i class="fas fa-pen"></i>                                     
                                      </a></td>
 
@@ -102,17 +102,12 @@
     <div class="card-body">
       <form class="form-horizontal" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label">Static</label>
-          <div class="col-md-9">
-            <p class="form-control-static">Username</p>
-          </div>
-        </div>
+        
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="select1">Categoria del tema</label>
           <div class="col-md-9">
             <select class="form-control" id="select1" name="select1">
-              <option value="0">Seleccione la categoria</option>
+              <option selected disabled>Seleccione la categoria</option>
               {% for categoria in categorias %}
               <option value="1">{{categoria.nombre_categoria}}</option>
               {% endfor %}
@@ -122,7 +117,7 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="text-input">Titulo </label>
           <div class="col-md-9">
-            <input class="form-control" id="text-input" type="text" name="titulo" placeholder="Titulo del tema">
+            <input class="form-control" id="text-input" type="text" name="titulo" value="{{tema.titulo}}">
           </div>
         </div>
   
@@ -130,7 +125,7 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="fecha">Date Input</label>
           <div class="col-md-9">
-            <input class="form-control" id="date-input" type="date" name="fecha" placeholder="date"><span
+            <input class="form-control" id="date" type="date" name="fecha" value="{{tema.fecha|date:'Y-m-d' }}"><span
               class="help-block">Please enter a valid date</span>
           </div>
         </div>
@@ -139,14 +134,14 @@
           <label class="col-md-3 col-form-label" for="textarea-input">Descripción</label>
           <div class="col-md-9">
             <textarea class="form-control" id="textarea-input" name="descripcion" rows="16"
-              placeholder="Describa el tema .."></textarea>
+              placeholder="Describa el tema ..">{{tema.descripcion}}</textarea>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="estado">Estado del tema</label>
           <div class="col-md-9">
             <select class="form-control" id="select1" name="estado">
-              <option value="0">Seleccione el estado del tema</option>
+              <option selected disabled>Seleccione el estado del tema</option>
               <option value="1">Aprobado</option>
               <option value="2">Pendiente</option>
   
@@ -175,7 +170,7 @@
               <div class="form-group row">
                 <label class="col-md-3 col-form-label" for="imagen1"><strong> Seleccione la imagen 1</strong></label>
                 <div class="col-md-9">
-                  <input id="file-input" type="file" name="imagen1" accept="image/*" required>
+                  <input id="file-input" type="file" name="imagen1" accept="image/*" value="asasd.jpg" required>
                 </div>
               </div> 
               

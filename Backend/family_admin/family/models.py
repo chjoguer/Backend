@@ -18,7 +18,6 @@ class UserProfile(AbstractUser):
     def __str__(self):           
         return self.username  
 
-
 class Tema(models.Model):
     #Enum
     class Estado(models.IntegerChoices):
@@ -42,7 +41,6 @@ class Categoria_Tema(models.Model):
     def __str__(self):              
         return self.nombre_categoria
 
- 
 class Imagenes_Tema(models.Model):
     image = models.ImageField(upload_to='image/',null=False,blank=True,verbose_name="Imagen del tema")
     id_tema = models.ForeignKey(Tema, on_delete=models.CASCADE)
@@ -52,7 +50,22 @@ class Videos_Tema(models.Model):
     video = models.FileField(upload_to="video/",null=False,blank=True,verbose_name="Video del tema")
     id_tema = models.ForeignKey(Tema, on_delete=models.CASCADE)
     
-
 class Audio_Tema(models.Model):
     audio = models.FileField(upload_to="audio/",null=False,blank=True,verbose_name="Audio del tema")
     id_tema = models.ForeignKey(Tema, on_delete=models.CASCADE)
+
+
+class Galeria(models.Model):
+    id_galeria = models.AutoField(primary_key=True)
+    descripcion= models.CharField(max_length=100,null=True,blank=True)
+
+class Imagenes_galeria(models.Model):
+    image = models.ImageField(upload_to='image/',null=False,blank=True,verbose_name="Imagen del tema")
+    id_galeria = models.ForeignKey(Galeria, on_delete=models.CASCADE)
+
+class Videos_galeroa(models.Model):
+    video = models.FileField(upload_to="video/",null=False,blank=True,verbose_name="Video del tema")
+    id_galeria = models.ForeignKey(Galeria, on_delete=models.CASCADE)
+    
+
+
