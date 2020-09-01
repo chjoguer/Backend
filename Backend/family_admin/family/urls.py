@@ -21,6 +21,8 @@ urlpatterns = [
 
      path('buzon', vista_buzon_entrada, name='buzon_entrada'),
 
+     path('recibir_imagenes', recibir_imagenes),
+
 
      
 ]

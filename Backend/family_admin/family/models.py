@@ -63,7 +63,7 @@ class Imagenes_galeria(models.Model):
     image = models.ImageField(upload_to='image/',null=False,blank=True,verbose_name="Imagen del tema")
     id_galeria = models.ForeignKey(Galeria, on_delete=models.CASCADE)
 
-class Videos_galeroa(models.Model):
+class Videos_galeria(models.Model):
     video = models.FileField(upload_to="video/",null=False,blank=True,verbose_name="Video del tema")
     id_galeria = models.ForeignKey(Galeria, on_delete=models.CASCADE)
     
