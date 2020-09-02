@@ -90,17 +90,16 @@ function postImages(){
     });
 }
 
-//funcion para cargar videos
-function postVideos(){
-    $('#postvideos').click(function(e){
-        e.preventDefault();
+// //funcion para cargar videos
+// function postVideos(){
+//     $('#postvideos').click(function(e){
+//         e.preventDefault();
         
-    });
-}
+//     });
+// }
 
 $( document ).ready(function() {
     //Llamada funciones
     addImages();
-    addVideo();
     postImages();
 });

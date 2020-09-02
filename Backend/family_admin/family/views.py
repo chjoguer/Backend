@@ -177,7 +177,7 @@ def logout_view(request):
     # except:
     #  pass
     # return render(request, 'app_foldername/login.html', {})
-
+@csrf_exempt
 def recibir_imagenes(request):
     if request.method == "POST":
         galeria = Galeria(id_galeria=1,descripcion="post  multiple")
