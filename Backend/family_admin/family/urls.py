@@ -1,8 +1,12 @@
 from django.urls import path
 from .views import *
 from .api import *
+from django.urls import path
+from rest_framework_simplejwt import views as jwt_views
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 urlpatterns = [
+
      path('', signup),
      path('index', content, name ='index'),
      path('signup', signup, name='signup'),
@@ -32,5 +36,10 @@ urlpatterns = [
 
      #Api para el consumo en el frontend
      path('getPrincipalesTemas/', get_temasPrincipales),
+     
+     #autenticacion
+    
+    path('api-token-auth/', obtain_jwt_token),
+     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 
 ]
