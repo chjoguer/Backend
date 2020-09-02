@@ -80,11 +80,11 @@ WSGI_APPLICATION = 'family_admin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'family',
-	    'USER': 'root',
-	    'PASSWORD': '',
+        'NAME': 'dbfamily',
+	    'USER': 'luis',
+	    'PASSWORD': '12345678',
 	    'HOST': 'localhost',
-	    'PORT': '3306',
+	    'PORT': '3308',
     }
 }
 

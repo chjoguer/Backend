@@ -47,22 +47,6 @@ function addImages(){
     });
 }
 
-//anadir dinamicamente inputs de imagenes
-function addVideo(){
-    var count_video = 1;
-    $('#addvideo').click(function(){
-        var div_video    = $('#video');
-        if(count_video<4){
-            var add = '<label class="col-md-3 col-form-label" for="imagen1"><strong> Seleccione video </strong></label>';
-            add+='<div class="col-md-4">';
-            add+='<input id="video-input" type="file" name="videos[]" accept="image/*" required="">';
-            add+='</div>';
-            add+='<div class="col-md-5 text-right"></div>';
-            div_video.append(add);
-            count_video++;
-        }
-    });
-}
 
 function setCsrf(){
     $.ajaxSetup({
@@ -118,6 +102,5 @@ $( document ).ready(function() {
     //Llamada funciones
     addImages();
     addVideo();
-    postVideos();
     postImages();
 });
