@@ -25,7 +25,7 @@ SECRET_KEY = 'kdz9qv!8bd@!$ul2g)iyv#db2$7o(wtp9@gyr64u_jtsgyt!0%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,18 +38,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True 
+CORS_ALLOW_CREDENTIALS = True
+
 #Registro mi propia tabla de registros de usuario
 AUTH_USER_MODEL = 'family.UserProfile'
 
@@ -81,10 +87,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dbfamily',
-	    'USER': 'luis',
-	    'PASSWORD': '12345678',
+	    'USER': 'root',
+	    'PASSWORD': '23198',
 	    'HOST': 'localhost',
-	    'PORT': '3308',
+	    'PORT': '3306',
     }
 }
 

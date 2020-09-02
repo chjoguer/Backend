@@ -47,7 +47,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="index.html">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Buzón de entrada</span></a>
+          <span>Panel de control</span></a>
       </li>
 
       <!-- Divider -->
@@ -93,7 +93,7 @@
       </li>
       {% endif %}
       <!-- Nav Item - Pages Collapse Menu -->
-      {% if request.user.tipo == 'E'  %}
+      {% if request.user.tipo == 'A'  %}
 
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseT" aria-expanded="true" aria-controls="collapseT">
@@ -120,8 +120,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Multimedia:</h6>
             <a class="collapse-item" href="{% url 'galeria' %}">Subir multimedia</a>
-            <a class="collapse-item" href="{% url 'galeria_pk' %}">Modificar multimedia</a>
-            <a class="collapse-item" href="utilities-animation.html">Eliminar multimedia</a>
+            <a class="collapse-item" href="{% url 'hola' %}">Eliminar multimedia</a>
           </div>
         </div>
       </li>

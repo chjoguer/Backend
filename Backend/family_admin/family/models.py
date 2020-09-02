@@ -18,6 +18,13 @@ class UserProfile(AbstractUser):
     def __str__(self):           
         return self.username  
 
+class Categoria_Tema(models.Model):
+    id_categoria_tema=models.AutoField(primary_key=True)
+    nombre_categoria = models.CharField(max_length=200,null=False,blank=True,verbose_name="Nombre de la categoria")
+    
+    def __str__(self):              
+        return self.nombre_categoria
+
 class Tema(models.Model):
     #Enum
     class Estado(models.IntegerChoices):
@@ -25,6 +32,7 @@ class Tema(models.Model):
         PENDIENTE = 2
     
     id_tema = models.AutoField(primary_key=True)
+    tema_categoria = models.ForeignKey(Categoria_Tema,on_delete=models.CASCADE,null=True,blank=True)
     estado = models.IntegerField(choices=Estado.choices)
     titulo = models.CharField(max_length=100,null=False,blank=False,verbose_name="Titulo del tema")
     descripcion = models.TextField(max_length="900",null=False,blank=True,verbose_name="Descripcion del tema")
@@ -33,13 +41,7 @@ class Tema(models.Model):
     def __str__(self):              
         return self.titulo
 
-class Categoria_Tema(models.Model):
-    id_categoria_tema=models.AutoField(primary_key=True)
-    nombre_categoria = models.CharField(max_length=200,null=False,blank=True,verbose_name="Nombre de la categoria")
-    id_tema = models.ForeignKey(Tema,on_delete=models.CASCADE,null=True,blank=True)
-    
-    def __str__(self):              
-        return self.nombre_categoria
+
 
 class Imagenes_Tema(models.Model):
     image = models.ImageField(upload_to='image/',null=False,blank=True,verbose_name="Imagen del tema")
@@ -63,7 +65,7 @@ class Imagenes_galeria(models.Model):
     image = models.ImageField(upload_to='image/',null=False,blank=True,verbose_name="Imagen del tema")
     id_galeria = models.ForeignKey(Galeria, on_delete=models.CASCADE)
 
-class Videos_galeroa(models.Model):
+class Videos_galeria(models.Model):
     video = models.FileField(upload_to="video/",null=False,blank=True,verbose_name="Video del tema")
     id_galeria = models.ForeignKey(Galeria, on_delete=models.CASCADE)
     

@@ -3,13 +3,24 @@ from django.contrib.auth import authenticate, login, logout
 from .models import UserProfile
 from .models import *
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 def content(request):
     return render(request, 'views/contenido.html')
 
 def view_eliminar_galeria(request):
-    return render(request, 'views/galeria/eliminar_galeria.html')
+    imagenes = Imagenes_galeria.objects.filter(id_galeria=1)#solo hay una galeria
+    categorias = Categoria_Tema.objects.all()
+
+    print(imagenes)
+    return render(request, 'views/galeria/eliminar_galeria.html',{'imagenes':imagenes})
+
+def eliminar_galeria(request,pk):
+    imagenes = Imagenes_galeria.objects.filter(id_galeria=1) #solo hay una galeria
+    image = Imagenes_galeria.objects.get(id=pk)   #solo hay una galeria
+    image.delete()
+    return render(request, 'views/galeria/eliminar_galeria.html',{'imagenes':imagenes})
 
 def vista_buzon_entrada(request):
     return render(request, 'notificaciones/buzon_entrada.html')
@@ -21,15 +32,16 @@ def vista_registrar_tema(request):
     if(request.method == 'POST'):
         try:
             #Esteado enum 1:Aprobado, 2:Pendiente
+            cate_tema = Categoria_Tema.objects.get(nombre_categoria=request.POST['categoria'])
             tema = Tema(estado=request.POST['estado'],
                         titulo=request.POST['titulo'],
+                        tema_categoria=cate_tema,
                         descripcion=request.POST['descripcion'],
                         )
             if request.POST['fecha'] != '' :
                 tema.fecha=request.POST['fecha']   
-
             tema.save()
-
+                        
             #Esta podria ser la imagen que se muestra en el index del portal web
             imagen_tema_1 = Imagenes_Tema(id_tema=tema)
             imagen_tema_1.image = request.FILES['imagen1']
@@ -60,18 +72,30 @@ def view_modificar_tema(request):
     All_temas = Tema.objects.all()
     categorias = Categoria_Tema.objects.all()
     return render(request, 'views/modificaciones/modificar_tema.html',{'temas':All_temas,'categorias':categorias,"estado":Tema.Estado})
-
+@csrf_exempt
 def modificar_tema(request,pk):
     All_temas = Tema.objects.all()
     categorias = Categoria_Tema.objects.all()
     try:
         tema = Tema.objects.get(id_tema=pk)
         if request.method == 'POST':
-            print(5)
+            tema.titulo= request.POST['titulo']
+            tema.fecha=request.POST['fecha']
+            tema.descripcion=request.POST['descripcion']
+            tema.estado=request.POST['estado']
+            tema.save()     
 
+            imagenes_tema = Imagenes_Tema.objects.filter(id_tema=pk)[0]
+            imagenes_tema.image=request.FILES['imagen1']
+            imagenes_tema.save()
+            imagenes_tema2 = Imagenes_Tema.objects.filter(id_tema=pk)[1]
+            imagenes_tema2.image=request.FILES['imagen1']
+            imagenes_tema2.save()
+            messages.add_message(request, messages.SUCCESS, 'Modificacion exitosa.')
+            return render(request, 'views/modificaciones/modificar_tema.html',{'temas':All_temas,'categorias':categorias,"estado":Tema.Estado,'tema':tema})
     except Exception as e:
-        print(e)
-
+        print("Error ->", e.args)
+        messages.add_message(request, messages.ERROR, 'No se pudo realizar la modificacion.')
     return render(request, 'views/modificaciones/modificar_tema.html',{'temas':All_temas,'categorias':categorias,"estado":Tema.Estado,'tema':tema})
 
 
@@ -101,7 +125,7 @@ def eliminar_tema(request,pk):
 
 
 def view_galeria(request):
-        return render(request, 'views/galeria/view_galeria.html')
+    return render(request, 'views/galeria/view_galeria.html')
 
 
 
