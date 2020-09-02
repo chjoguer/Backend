@@ -95,6 +95,7 @@ def modificar_tema(request,pk):
             imagenes_tema2.image=request.FILES['imagen1']
             imagenes_tema2.save()
             messages.add_message(request, messages.SUCCESS, 'Modificacion exitosa.')
+            #return redirect(modificar_tema)
             return render(request, 'views/modificaciones/modificar_tema.html',{'temas':All_temas,'categorias':categorias,"estado":Tema.Estado,'tema':tema})
     except Exception as e:
         print("Error ->", e.args)
@@ -153,9 +154,9 @@ def signup(request):
                 except expression as identifier:
                     pass
                 if usuario.tipo == "E": #Editor
-                    return redirect('index')
+                    return redirect('registrar_tema')
                 elif usuario.tipo == "A": #Administrador
-                    return redirect('index')
+                    return redirect('registrar_tema')
                 elif usuario.tipo == "C": #Consejero
                     return redirect('index')
             else:
@@ -185,8 +186,10 @@ def recibir_imagenes(request):
         for k,v in request.FILES.items():
             imagen = Imagenes_galeria(id_galeria=galeria,image=v)
             imagen.save()
-        return JsonResponse(200,safe=False)
+            # return redirect('views/galeria/view_galeria.html')
+            return JsonResponse(200,safe=False)
     return JsonResponse(400,safe=False)
+    # return redirect('views/galeria/view_galeria.html')
 
 def recibir_video(request):
     if request.method == "POST":
