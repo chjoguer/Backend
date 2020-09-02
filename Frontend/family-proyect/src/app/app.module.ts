@@ -11,6 +11,8 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 
 
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/login/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,12 +21,15 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     IndexComponent,
     GalleryComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     appRoutingModule,
     RouterModule,
     HttpClientModule,
+    FormsModule,
+
 
   ],
   providers: [],
