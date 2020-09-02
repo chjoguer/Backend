@@ -4,6 +4,9 @@ from .models import UserProfile
 from .models import *
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+
+
 # Create your views here.
 
 def content(request):
@@ -175,3 +178,22 @@ def logout_view(request):
     #  pass
     # return render(request, 'app_foldername/login.html', {})
 
+def recibir_imagenes(request):
+    if request.method == "POST":
+        galeria = Galeria(id_galeria=1,descripcion="post  multiple")
+        galeria.save()
+        for k,v in request.FILES.items():
+            imagen = Imagenes_galeria(id_galeria=galeria,image=v)
+            imagen.save()
+        return JsonResponse(200,safe=False)
+    return JsonResponse(400,safe=False)
+
+def recibir_video(request):
+    if request.method == "POST":
+        galeria = Galeria(id_galeria=1,descripcion="post  video")
+        galeria.save()
+        for k,v in request.FILES.items():
+            video = Videos_galeria(id_galeria=galeria,video=v)
+            video.save()
+        return render(request, 'views/galeria/view_galeria.html')
+    return render(request, 'views/galeria/view_galeria.html')

@@ -25,10 +25,12 @@ urlpatterns = [
 
      path('buzon', vista_buzon_entrada, name='buzon_entrada'),
 
+    
+     path('recibir_imagenes', recibir_imagenes),
+     path('recibir_video', recibir_video, name='recibir_video'),
+
+
      #Api para el consumo en el frontend
      path('getPrincipalesTemas/', get_temasPrincipales),
 
-
-
-     
 ]

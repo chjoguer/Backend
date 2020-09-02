@@ -236,11 +236,11 @@ img {
     border: none;
     background-color: transparent;
     cursor: pointer;
-    display: none
+    display: none;
 }
 .classy-navbar-toggler .navbarToggler {
     display: inline-block;
-    cursor: pointer
+    cursor: pointer;
 }
 .classy-navbar-toggler .navbarToggler span {
     position: relative;
@@ -253,20 +253,20 @@ img {
     -webkit-transition-duration: .3s;
     transition-duration: .3s;
     width: 30px;
-    cursor: pointer
+    cursor: pointer;
 }
 .classy-navbar-toggler .navbarToggler.active span:nth-of-type(1) {
     -webkit-transform: rotate3d(0, 0, 1, 45deg);
     transform: rotate3d(0, 0, 1, 45deg);
-    top: 8px
+    top: 8px;
 }
 .classy-navbar-toggler .navbarToggler.active span:nth-of-type(2) {
-    opacity: 0
+    opacity: 0;
 }
 .classy-navbar-toggler .navbarToggler.active span:nth-of-type(3) {
     -webkit-transform: rotate3d(0, 0, 1, -45deg);
     transform: rotate3d(0, 0, 1, -45deg);
-    top: -8px
+    top: -8px;
 }
 .classynav ul li .megamenu {
     position: absolute;

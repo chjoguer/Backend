@@ -794,7 +794,7 @@ textarea:focus {
     position: relative;
     z-index: 1;
     padding: 25px 0;
-    background-color: $dark-color;
+    background-color: #ffffff !important;
     .cta-text {
         @media #{$breakpoint-xs} {
             @include flex-wrap(wrap);

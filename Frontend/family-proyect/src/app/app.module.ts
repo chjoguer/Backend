@@ -9,6 +9,9 @@ import { FooterComponent } from './common/footer/footer.component';
 import { IndexComponent } from './components/index/index.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 
+
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +24,7 @@ import { GalleryComponent } from './components/gallery/gallery.component';
     BrowserModule,
     appRoutingModule,
     RouterModule,
+    HttpClientModule,
 
   ],
   providers: [],
