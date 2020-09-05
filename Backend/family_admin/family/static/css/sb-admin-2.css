@@ -168,6 +168,9 @@ a:hover {
   color: #224abe;
   text-decoration: underline;
 }
+div#hover_img a#previs { position:relative; }
+div#hover_img a#previs span#spn { position:absolute; display:none; z-index:99; }
+div#hover_img a#previs:hover span#spn { display:block; }
 
 a:not([href]) {
   color: inherit;
@@ -10817,7 +10820,7 @@ a:focus {
 }
 
 .bg-password-image {
-  background: url("https://source.unsplash.com/oWTW-jNGl9I/600x800");
+  background: url("../img/pass.jpg");
   background-position: center;
   background-size: cover;
 }

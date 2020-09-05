@@ -30,6 +30,18 @@ $(document).ready(function() {
      })
  });
 
+ $(document).ready(function() {
+    // messages timeout for 10 sec 
+    setTimeout(function() {
+        $('.load-gif').fadeOut('slow');
+    }, 3000); // <-- time in milliseconds, 1000 =  1 sec
+
+//     // delete message
+    // $('.del-msg').live('click',function(){
+    //     $('.del-msg').parent().attr('style', 'display:none;');
+    // })
+});
+
 //anadir dinamicamente inputs de videos
 function addImages(){
     var count_image = 1;
@@ -66,9 +78,9 @@ function postImages(){
             var file = $(this)[0].files[0];
             form_data.append(file.name,file)
         });
-        /*for (var pair of form_data.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-        }*/
+        // for (var pair of form_data.entries()) {
+        //     console.log(pair[0]+ ', ' + pair[1]); 
+        // }
         setCsrf();
         //Enviar ajax con arreglo de imagenes
         $.ajax({
@@ -79,7 +91,10 @@ function postImages(){
             contentType: false, 
          
             success : function(json) {
-                console.log(json)
+                console.log(json);
+                window.location.href = "galeria";
+
+               
             },
          
             error : function(jqXHR, status, error) {

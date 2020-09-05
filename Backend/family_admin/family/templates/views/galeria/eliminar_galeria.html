@@ -19,6 +19,12 @@
 {% endif %}
 
 
+{% block css %}
+{% load static %}
+<link href="{% static 'css/util.css' %}" rel="stylesheet">
+{% endblock %}
+
+
 <div class="card mb-4">
     <div class="card-header">
         <i class="fas fa-table mr-1"></i>
@@ -45,7 +51,11 @@
                     {% for imagen in imagenes %}
                     <tr>
                          <td>{{imagen.id}}</td>
-                        <td>{{imagen.image}}</td>
+                        <td>     
+                                <div id="hover_img">
+                                    <a id="previs" href="#">{{imagen.image}}<span id="spn"><img id="im"src="{% get_media_prefix %}{{imagen.image}}" alt="image" height="100" /></span></a>
+                                </div>
+                        </td>
                         <td>
                             <a href="{% url 'eliminar_galeriaPK' imagen.id %}" class="btn btn-success btn-circle btn-sm">
                                 <i class="fas fa-pen"></i>
@@ -66,5 +76,5 @@
 
 
 
-
 {% endblock  %}
+

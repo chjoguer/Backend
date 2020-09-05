@@ -11,7 +11,8 @@ urlpatterns = [
      path('index', content, name ='index'),
      path('signup', signup, name='signup'),
      path('logout', logout_view, name='logout'),
-
+     path('recuperar-password', forgot_password,name='password'),#template
+     path('recuperar_contrasenia', recuperar_contrasenia,name='reset_pass'),#method
      #tema
      path('tema', vista_registrar_tema, name='registrar_tema'),
      path('tema_modificar', view_modificar_tema, name='modificar_tema'),

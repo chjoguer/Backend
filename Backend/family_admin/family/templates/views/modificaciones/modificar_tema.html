@@ -108,10 +108,10 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="select1">Categoria del tema</label>
           <div class="col-md-9">
-            <select class="form-control" id="select1" name="catTema">
+            <select class="form-control" id="select1" name="categoria" required>
               <option selected disabled>Seleccione la categoria</option>
               {% for categoria in categorias %}
-              <option value="{{categoria.nombre_categoria}}">{{categoria.nombre_categoria}}</option>
+              <option value="{{categoria.nombre_categoria}}" >{{categoria.nombre_categoria}}</option>
               {% endfor %}
             </select>
           </div>
@@ -142,10 +142,10 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="estado">Estado del tema</label>
           <div class="col-md-9">
-            <select class="form-control" id="select1" name="estado">
-              <option selected disabled value={{tema.estado}}>Seleccione el estado del tema</option>
+            <select class="form-control" id="select1" name="estado" required>
+              <option  disabled selected >Seleccione el estado del tema</option>
               <option value="1">Aprobado</option>
-              <option value="2">Pendiente</option>
+              <option  value="2">Pendiente</option>
   
             </select>
           </div>
@@ -167,12 +167,12 @@
           <div class="collapse show" id="collapseCardExample" >
 
             <div class="card-body">
-              <div class="custom-control custom-checkbox">
+              <!--<div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                 <input type="hidden" name="check">
                 <label class="custom-control-label" for="customCheck1">Actualizar imágenes</label>
               </div>
-              
+               -->
               <strong>Subir Imagenes</strong> 
   
               <div class="form-group row">
