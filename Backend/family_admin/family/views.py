@@ -154,8 +154,6 @@ def view_galeria(request):
 
 @csrf_exempt
 def recuperar_contrasenia(request):
-    print(request.POST.get('correo'))
-    notificaciones()
     if request.method == 'POST':
         #response = json.loads(request.body)
         try:
