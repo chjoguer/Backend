@@ -135,8 +135,10 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="textarea-input">Descripción</label>
           <div class="col-md-9">
-            <textarea class="form-control" id="textarea-input" name="descripcion" rows="16"
-              placeholder="Describa el tema ..">{{tema.descripcion}}</textarea>
+            <!--Cambio Aqui-->
+            <textarea id="editor" name="descripcion"  autofocus>{{tema.descripcion}}</textarea>
+            <!--<textarea class="form-control" id="textarea-input" name="descripcion" rows="16"
+              placeholder="Describa el tema ..">{{tema.descripcion}}</textarea>-->
           </div>
         </div>
         <div class="form-group row">
@@ -222,7 +224,5 @@
     </div>
     
   </div>
-  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-  <script>tinymce.init({selector:'textarea'});</script>
 
 {% endblock  %}

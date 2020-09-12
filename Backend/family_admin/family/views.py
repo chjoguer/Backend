@@ -67,7 +67,7 @@ def vista_registrar_tema(request):
         except Exception as e :
             print("Errors -> ", e)
             messages.add_message(request,messages.ERROR,'Error al guardar el tema.')
-        notificaciones(request.POST['titulo'])
+        #notificaciones(request.POST['titulo'])
         return redirect('registrar_tema') #registrar_tema es la version corta de views/registros/registrar_tema.html
 
     return render(request, 'views/registros/registrar_tema.html',{'categorias':categorias,"estado":Tema.Estado})
