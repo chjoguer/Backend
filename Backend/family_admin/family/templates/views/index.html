@@ -21,10 +21,21 @@
   <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
   <link href="{% static 'css/galeria.css' %}" rel="stylesheet">
 
+  <link href="{% static 'css/simditor.css' %}" rel="stylesheet">
+
   <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 </head>
 
 <body id="page-top">
+  <div class="container2">
+	  <h5>Cargando</h5>
+	  <svg class="loader2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
+		  <circle cx="170" cy="170" r="160" stroke="#4e73df"/>
+		  <circle cx="170" cy="170" r="135" stroke="#a8abb1"/>
+		  <circle cx="170" cy="170" r="110" stroke="#4e73df"/>
+		  <circle cx="170" cy="170" r="85" stroke="#a8abb1"/>
+	  </svg>
+  </div>
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -442,5 +453,10 @@
   <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
   <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
 
+  <script src="{% static 'js/module.js' %}"></script>
+  <script src="{% static 'js/hotkeys.js' %}"></script>
+  <script src="{% static 'js/uploader.js' %}"></script>
+  <script src="{% static 'js/simditor.js' %}"></script>
+  
 </body>
 </html>
