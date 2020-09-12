@@ -57,14 +57,13 @@
                         <td>Pendiente</td>
                         {% endif %}
                         <td>{{tema.id_tema}}</td>
-                        <td><a href="{% url 'modificar_tema_pk' tema.id_tema %}" class="btn btn-success btn-circle btn-sm">
+                        <td><a href="#" class="btn btn-success btn-circle btn-sm">
                                 <i class="fas fa-pen"></i>
                             </a>
-                            <button class="btn btn-danger btn-circle btn-sm "  data-tema="{{tema.id_tema}}"  href="#" data-toggle="modal" data-target="#ConfirmModal">
+                            <button class="btn btn-danger btn-circle btn-sm "  data-tema="{{tema.id_tema}}" href="#" data-toggle="modal" data-target="#ConfirmModal">
                                 <i class="fas fa-trash"></i>
                             </button>
                            
-                            <!-- href="{% url 'eliminar_tema_pk' tema.id_tema %}" -->
                         </td>
 
                     </tr>
@@ -87,13 +86,30 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Elige la opcion que deseas realizar.</div>
+        <div class="modal-body">
+          <form action="{% url 'eliminar_tema_p' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %} 
+          Elige la opcion que deseas realizar.
+          <input type="hidden" id="tema" name="tema">
+        </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" href="{% url 'logout' %}">Si, eliminalo</a>
-         
+          <button class="btn btn-primary" type="submit" data-dismiss="modal">Si, eliminalo</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
+  <script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function(event) {
+        $('#ConfirmModal').on('show.bs.modal',function(event){
+            var button = $(event.relatedTarget)
+            var tema_modal = button.data('tema')
+
+            var modal = $(this)
+
+            modal.find('.modal-body #tema').val(tema_modal);
+        });
+    });
+  </script>
 {% endblock  %}

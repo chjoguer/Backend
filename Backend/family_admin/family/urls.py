@@ -19,7 +19,7 @@ urlpatterns = [
      path('tema_modificar/<int:pk>', modificar_tema, name='modificar_tema_pk'),
 
      path('tema_eliminar', view_eliminar_tema, name='eliminar_tema'),
-     path('tema_eliminar/<int:pk>', eliminar_tema, name='eliminar_tema_pk'),
+     path('eliminar_tema_p', eliminar_tema, name='eliminar_tema_p'),
 
 
      #galeria

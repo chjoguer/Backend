@@ -130,10 +130,10 @@ def view_eliminar_tema(request):
     categorias = Categoria_Tema.objects.all()
     return render(request, 'views/eliminacion/eliminar_tema.html',{'temas':All_temas,'categorias':categorias,"estado":Tema.Estado})
 @login_required(login_url='/')
-def eliminar_tema(request,pk):
+def eliminar_tema(request):
     try:
-        print(pk)
-        tema = Tema.objects.get(id_tema=pk)
+        print(request)
+        """tema = Tema.objects.get(id_tema=pk)
         imagenes = Imagenes_Tema.objects.filter(id_tema=tema.id_tema)
         for imagen in imagenes:
             imagenes.delete()
@@ -141,7 +141,7 @@ def eliminar_tema(request,pk):
         videos.delete()
         tema.delete()
         print(imagenes)
-        messages.add_message(request, messages.SUCCESS, 'Tema eliminado exitosamente.')
+        messages.add_message(request, messages.SUCCESS, 'Tema eliminado exitosamente.')"""
     except Exception as e:
         print(e)
         messages.add_message(request,messages.ERROR,'Error al eliminar el tema.')
