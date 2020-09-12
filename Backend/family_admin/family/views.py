@@ -7,29 +7,31 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.core.mail import EmailMessage, BadHeaderError, send_mail, send_mass_mail
 from rest_framework.response import Response
-# Create your views here.
+from django.contrib.auth.decorators import login_required
 
+# Create your views here.
+@login_required(login_url='/')
 def content(request):
     return render(request, 'views/contenido.html')
-
+@login_required(login_url='/')
 def view_eliminar_galeria(request):
     imagenes = Imagenes_galeria.objects.filter(id_galeria=1)#solo hay una galeria
     categorias = Categoria_Tema.objects.all()
 
     print(imagenes)
     return render(request, 'views/galeria/eliminar_galeria.html',{'imagenes':imagenes})
-
+@login_required(login_url='/')
 def eliminar_galeria(request,pk):
     imagenes = Imagenes_galeria.objects.filter(id_galeria=1) #solo hay una galeria
     image = Imagenes_galeria.objects.get(id=pk)   #solo hay una galeria
     image.delete()
     return render(request, 'views/galeria/eliminar_galeria.html',{'imagenes':imagenes})
-
+@login_required(login_url='/')
 def vista_buzon_entrada(request):
     return render(request, 'notificaciones/buzon_entrada.html')
 
 
-
+@login_required(login_url='/')
 def vista_registrar_tema(request):
     categorias = Categoria_Tema.objects.all()
     if(request.method == 'POST'):
@@ -70,7 +72,7 @@ def vista_registrar_tema(request):
 
     return render(request, 'views/registros/registrar_tema.html',{'categorias':categorias,"estado":Tema.Estado})
 
-
+@login_required(login_url='/')
 def view_modificar_tema(request):
     All_temas = Tema.objects.all()
     categorias = Categoria_Tema.objects.all()
@@ -80,6 +82,7 @@ def view_modificar_tema(request):
 # request.POST.get('categoria') retorna none si no contiene ningun elemento para option
 # request.POST['categoria']
 @csrf_exempt
+@login_required(login_url='/')
 def modificar_tema(request,pk):
     All_temas = Tema.objects.all()
     categorias = Categoria_Tema.objects.all()
@@ -111,22 +114,22 @@ def modificar_tema(request,pk):
                 imagenes_tema2 = Imagenes_Tema.objects.filter(id_tema=pk)[1]
                 imagenes_tema2.image=request.FILES['imagen2']
                 imagenes_tema2.save()
-
-            #return render(request, 'views/modificaciones/modificar_tema.html',{'temas':All_temas,'categorias':categorias,"estado":Tema.Estado,'tema':tema})
+            tema.save()     
+            messages.add_message(request, messages.SUCCESS, 'Modificacion exitosa.')
+            return render(request, 'views/modificaciones/modificar_tema.html',{'temas':All_temas,'categorias':categorias,"estado":Tema.Estado,'tema':tema})
     except Exception as e:
         print("Error ->", e)
         messages.add_message(request, messages.ERROR, 'No se pudo realizar la modificacion.')
 
-    tema.save()     
-    messages.add_message(request, messages.SUCCESS, 'Modificacion exitosa.')
+  
     return render(request, 'views/modificaciones/modificar_tema.html',{'temas':All_temas,'categorias':categorias,"estado":Tema.Estado,'tema':tema})
 
-
+@login_required(login_url='/')
 def view_eliminar_tema(request):
     All_temas = Tema.objects.all()
     categorias = Categoria_Tema.objects.all()
     return render(request, 'views/eliminacion/eliminar_tema.html',{'temas':All_temas,'categorias':categorias,"estado":Tema.Estado})
-
+@login_required(login_url='/')
 def eliminar_tema(request,pk):
     try:
         print(pk)
@@ -146,7 +149,7 @@ def eliminar_tema(request,pk):
     categorias = Categoria_Tema.objects.all()
     return redirect('eliminar_tema')
 
-
+@login_required(login_url='/')
 def view_galeria(request):
     return render(request, 'views/galeria/view_galeria.html')
 
@@ -227,7 +230,7 @@ def signup(request):
                 return render(request, 'views/login.html', {})
         else:
             # Return an 'invalid login' error message.
-            messages.add_message(request,messages.ERROR,'Creedenciales incorrectas, intentelo de nuevo...')
+            messages.add_message(request,messages.ERROR,'Usuario o contraseña incorrectas, intentelo de nuevo...')
             return render(request, 'views/login.html', {})
     else:
         return render(request, 'views/login.html', {})
@@ -247,6 +250,7 @@ def forgot_password(request):
 
 
 @csrf_exempt
+@login_required(login_url='/')
 def recibir_imagenes(request):
     if request.method == "POST":
         galeria = Galeria.objects.get(id_galeria=1)
@@ -257,7 +261,7 @@ def recibir_imagenes(request):
         return JsonResponse(200,safe=False)
     return JsonResponse(400,safe=False)
     # return redirect('views/galeria/view_galeria.html')
-
+@login_required(login_url='/')
 def recibir_video(request):
     if request.method == "POST":
         galeria = Galeria.objects.get(id_galeria=1)
@@ -268,7 +272,7 @@ def recibir_video(request):
     return render(request, 'views/galeria/view_galeria.html')
 
 
-
+@login_required(login_url='/')
 def notificaciones(informacion):
     usuarios = UserProfile.objects.all();
     asunto = 'Actualizacion de contenido Familias Unidas Ec'

@@ -51,9 +51,9 @@
 
 
       <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="fecha">Fecha</label>
+        <label class="col-md-3 col-form-label" for="datepicker">Fecha</label>
         <div class="col-md-9">
-          <input class="form-control" id="date-input" type="date" name="fecha" placeholder="date" required>
+          <input class="form-control" id="datepicker" type="date" name="fecha" placeholder="date" required>
           <!-- <span class="help-block">Please enter a valid date</span> -->
         </div>
       </div>
@@ -142,6 +142,8 @@
   </div>
   
 </div>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>tinymce.init({selector:'textarea'});</script>
 
 
 {% endblock  %}

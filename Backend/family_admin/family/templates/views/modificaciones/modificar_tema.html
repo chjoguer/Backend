@@ -7,13 +7,13 @@
     {% if message.tags == "success" %}
       <div class="card mb-4 py-3 border-left-success message">
               <div class="card-body ">
-                {{ message }}<a class="del-msg">&times;</a> 
-          </div>
+                <h5>{{message}}</h5>
+      </div>
     </div>
     {% else %}
       <div class="card mb-4 py-3 border-left-danger message">
           <div class="card-body ">
-                {{ message }}<a class="del-msg">&times;</a> 
+                <h5>{{message}}</h5>
           </div>
       </div>
     {% endif %}
@@ -125,9 +125,9 @@
   
   
         <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="fecha">Fecha</label>
+          <label class="col-md-3 col-form-label" for="datepicker">Fecha</label>
           <div class="col-md-9">
-            <input class="form-control" id="date" type="date" name="fecha" value="{{tema.fecha}}"><span
+            <input class="form-control" id="datepicker" type="date" name="fecha" value="{{tema.fecha}}"><span
               class="help-block">{{tema.fecha}}</span>
           </div>
         </div>
@@ -222,5 +222,7 @@
     </div>
     
   </div>
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>tinymce.init({selector:'textarea'});</script>
 
 {% endblock  %}
