@@ -109,6 +109,21 @@ function postImages(){
     });
 }
 
+function showLoading(){
+    $('#postimages').click(function(){
+        $('.container2').fadeIn(1000);
+    });
+    $('#postvideos').click(function(){
+        $('.container2').fadeIn(1000);
+    });
+    $('#regTem').click(function(){
+        $('.container2').fadeIn(1000);
+    });
+    $('#modTem').click(function(){
+        $('.container2').fadeIn(1000);
+    });
+}
+
 // //funcion para cargar videos
 // function postVideos(){
 //     $('#postvideos').click(function(e){
@@ -121,6 +136,7 @@ $( document ).ready(function() {
     //Llamada funciones
     addImages();
     postImages();
+    showLoading();
 });
 
 $(document).ready(function () {
