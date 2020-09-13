@@ -92,9 +92,9 @@ function postImages(){
          
             success : function(json) {
                 console.log(json);
-                window.location.href = "galeria";
-
-               
+                setTimeout(function(){
+                    window.location.href = "galeria";
+                },5000)
             },
          
             error : function(jqXHR, status, error) {
@@ -102,6 +102,21 @@ function postImages(){
             },
         });
         return false;
+    });
+}
+
+function showLoading(){
+    $('#postimages').click(function(){
+        $('.container2').fadeIn(1000);
+    });
+    $('#postvideos').click(function(){
+        $('.container2').fadeIn(1000);
+    });
+    $('#regTem').click(function(){
+        $('.container2').fadeIn(1000);
+    });
+    $('#modTem').click(function(){
+        $('.container2').fadeIn(1000);
     });
 }
 
@@ -117,6 +132,7 @@ $( document ).ready(function() {
     //Llamada funciones
     addImages();
     postImages();
+    showLoading();
 });
 var today = new Date().toISOString().split('T')[0];
 document.getElementById("datepicker").setAttribute('min', today);
