@@ -94,9 +94,9 @@ function postImages(){
                 console.log(json);
                 $('#succ').show();
                 $('html, body').animate({ scrollTop: $('#succ').offset().top }, 'slow');
-                //window.location.href = "galeria";
-
-               
+                setTimeout(function(){
+                    window.location.href = "galeria";
+                },3000)
             },
          
             error : function(jqXHR, status, error) {
@@ -111,10 +111,14 @@ function postImages(){
 
 function showLoading(){
     $('#postimages').click(function(){
-        $('.container2').fadeIn(1000);
+        setTimeout(function(){
+            $('.container2').fadeIn(1000);
+        },3000)        
     });
     $('#postvideos').click(function(){
-        $('.container2').fadeIn(1000);
+        setTimeout(function(){
+            $('.container2').fadeIn(1000);
+        },1000)
     });
     $('#regTem').click(function(){
         $('.container2').fadeIn(1000);
