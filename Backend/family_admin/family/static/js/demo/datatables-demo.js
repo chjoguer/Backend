@@ -134,6 +134,19 @@ $( document ).ready(function() {
     postImages();
     showLoading();
 });
+
+$(document).ready(function () {
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('#ConfirmModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var tema_modal = button.data('tema')
+
+            var modal = $(this)
+
+            modal.find('.modal-body #tema').val(tema_modal);
+        });
+    });
+});
 var today = new Date().toISOString().split('T')[0];
 document.getElementById("datepicker").setAttribute('min', today);
 

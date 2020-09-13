@@ -19,13 +19,13 @@ urlpatterns = [
      path('tema_modificar/<int:pk>', modificar_tema, name='modificar_tema_pk'),
 
      path('tema_eliminar', view_eliminar_tema, name='eliminar_tema'),
-     path('eliminar_tema_p', eliminar_tema, name='eliminar_tema_p'),
+     path('eliminar_tema_p', eliminar_tema_p, name='eliminar_tema_p'),
 
 
      #galeria
      path('galeria', view_galeria, name='galeria'),
      path('galeria_eliminar', view_eliminar_galeria, name='hola'),
-     path('galeria_eliminar_pk/<int:pk>', eliminar_galeria, name='eliminar_galeriaPK'),
+     path('eliminar_galeria_pk', eliminar_galeria, name='eliminar_galeria_p'),
 
 
      path('buzon', vista_buzon_entrada, name='buzon_entrada'),

@@ -1,27 +1,27 @@
 {% extends "views/index.html" %}
 {% block content %}
 {% if messages %}
-  {% for message in messages %}
-    {% if message.tags == "success" %}
-      <div class="card mb-4 py-3 border-left-success message">
-              <div class="card-body ">
-                {{ message }}<a class="del-msg">&times;</a> 
-          </div>
+{% for message in messages %}
+{% if message.tags == "success" %}
+<div class="card mb-4 py-3 border-left-success message">
+    <div class="card-body ">
+        {{ message }}<a class="del-msg">&times;</a>
     </div>
-    {% else %}
-      <div class="card mb-4 py-3 border-left-danger message">
-          <div class="card-body ">
-               <span> {{ message }}</span><a class="del-msg">&times;</a> 
-          </div>
-      </div>
-    {% endif %}
-  {% endfor %}
+</div>
+{% else %}
+<div class="card mb-4 py-3 border-left-danger message">
+    <div class="card-body ">
+        <span> {{ message }}</span><a class="del-msg">&times;</a>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
 {% endif %}
 
 
 <div class="card mb-4">
     <div class="card-header">
-        
+
         <i class="fas fa-table mr-1"></i>
         <span class="m-0 font-weight-bold text-primary">Temas publicados</span>
     </div>
@@ -60,10 +60,11 @@
                         <td><a href="#" class="btn btn-success btn-circle btn-sm">
                                 <i class="fas fa-pen"></i>
                             </a>
-                            <button class="btn btn-danger btn-circle btn-sm "  data-tema="{{tema.id_tema}}" href="#" data-toggle="modal" data-target="#ConfirmModal">
+                            <button class="btn btn-danger btn-circle btn-sm " type="button" data-tema="{{tema.id_tema}}"
+                                href="" data-toggle="modal" data-target="#ConfirmModal">
                                 <i class="fas fa-trash"></i>
                             </button>
-                           
+
                         </td>
 
                     </tr>
@@ -79,37 +80,41 @@
 <!-- Logout Modal-->
 <div class="modal fade" id="ConfirmModal" tabindex="-1" role="dialog" aria-labelledby="ConfirmModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Estas seguro de querer eliminar?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Estas seguro de querer eliminar?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="{% url 'eliminar_tema_p' %}" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    Elige la opcion que deseas realizar.
+                        {% csrf_token %}
+                        <input type="hidden" id="tema" name="tema">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" type="submit" >Si, eliminalo</button>
+                </div>
+            </form>
+
         </div>
-        <div class="modal-body">
-          <form action="{% url 'eliminar_tema_p' %}" method="POST" enctype="multipart/form-data">
-            {% csrf_token %} 
-          Elige la opcion que deseas realizar.
-          <input type="hidden" id="tema" name="tema">
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <button class="btn btn-primary" type="submit" data-dismiss="modal">Si, eliminalo</button>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
-  <script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function(event) {
-        $('#ConfirmModal').on('show.bs.modal',function(event){
-            var button = $(event.relatedTarget)
-            var tema_modal = button.data('tema')
+</div>
+<script type="text/javascript">
+        console.log("xxx")
 
-            var modal = $(this)
+        document.addEventListener("DOMContentLoaded", function (event) {
+            $('#ConfirmModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget)
+                var tema_modal = button.data('tema')
 
-            modal.find('.modal-body #tema').val(tema_modal);
+                var modal = $(this)
+
+                modal.find('.modal-body #tema').val(tema_modal);
+            });
         });
-    });
-  </script>
+ 
+</script>
 {% endblock  %}

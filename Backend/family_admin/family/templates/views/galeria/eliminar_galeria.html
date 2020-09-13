@@ -57,12 +57,10 @@
                                 </div>
                         </td>
                         <td>
-                            <a href="{% url 'eliminar_galeriaPK' imagen.id %}" class="btn btn-success btn-circle btn-sm">
-                                <i class="fas fa-pen"></i>
-                            </a>
-                            <a href="{% url 'eliminar_galeriaPK' imagen.id %}" class="btn btn-danger btn-circle btn-sm">
+                            <button class="btn btn-danger btn-circle btn-sm " type="button" data-galeria="{{imagen.id}}"
+                                href="" data-toggle="modal" data-target="#ConfirmModalGaleria">
                                 <i class="fas fa-trash"></i>
-                            </a>
+                            </button>
                     </td>                       
                     </tr>
                     {% endfor %}
@@ -74,6 +72,44 @@
     </div>
 </div>
 
+<div class="modal fade" id="ConfirmModalGaleria" tabindex="-1" role="dialog" aria-labelledby="ConfirmModalGaleria" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Estas seguro de querer eliminar?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="{% url 'eliminar_galeria_p' %}" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    Elige la opcion que deseas realizar.
+                        {% csrf_token %}
+                        <input type="hidden" id="galeria_id" name="galeria_id">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" type="submit" >Si, eliminalo</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('#ConfirmModalGaleria').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var tema_modal = button.data('galeria')
+
+            var modal = $(this)
+
+            modal.find('.modal-body #galeria_id').val(tema_modal);
+        });
+    });
+
+</script>
 
 
 {% endblock  %}

@@ -21,11 +21,13 @@ def view_eliminar_galeria(request):
     print(imagenes)
     return render(request, 'views/galeria/eliminar_galeria.html',{'imagenes':imagenes})
 @login_required(login_url='/')
-def eliminar_galeria(request,pk):
+def eliminar_galeria(request):
     imagenes = Imagenes_galeria.objects.filter(id_galeria=1) #solo hay una galeria
-    image = Imagenes_galeria.objects.get(id=pk)   #solo hay una galeria
+    image = Imagenes_galeria.objects.get(id=request.POST['galeria_id'])   #solo hay una galeria
     image.delete()
-    return render(request, 'views/galeria/eliminar_galeria.html',{'imagenes':imagenes})
+    return redirect('hola')
+
+   #return render(request, 'views/galeria/eliminar_galeria.html',{'imagenes':imagenes})
 @login_required(login_url='/')
 def vista_buzon_entrada(request):
     return render(request, 'notificaciones/buzon_entrada.html')
@@ -130,10 +132,9 @@ def view_eliminar_tema(request):
     categorias = Categoria_Tema.objects.all()
     return render(request, 'views/eliminacion/eliminar_tema.html',{'temas':All_temas,'categorias':categorias,"estado":Tema.Estado})
 @login_required(login_url='/')
-def eliminar_tema(request):
+def eliminar_tema_p(request):
     try:
-        print(request)
-        """tema = Tema.objects.get(id_tema=pk)
+        tema = Tema.objects.get(id_tema=request.POST['tema'])
         imagenes = Imagenes_Tema.objects.filter(id_tema=tema.id_tema)
         for imagen in imagenes:
             imagenes.delete()
@@ -141,12 +142,12 @@ def eliminar_tema(request):
         videos.delete()
         tema.delete()
         print(imagenes)
-        messages.add_message(request, messages.SUCCESS, 'Tema eliminado exitosamente.')"""
+        messages.add_message(request, messages.SUCCESS, 'Tema eliminado exitosamente.')
     except Exception as e:
         print(e)
         messages.add_message(request,messages.ERROR,'Error al eliminar el tema.')
 
-    categorias = Categoria_Tema.objects.all()
+        categorias = Categoria_Tema.objects.all()
     return redirect('eliminar_tema')
 
 @login_required(login_url='/')
