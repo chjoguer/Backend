@@ -92,13 +92,17 @@ function postImages(){
          
             success : function(json) {
                 console.log(json);
-                window.location.href = "galeria";
+                $('#succ').show();
+                $('html, body').animate({ scrollTop: $('#succ').offset().top }, 'slow');
+                //window.location.href = "galeria";
 
                
             },
          
             error : function(jqXHR, status, error) {
                 console.log(jqXHR,status,error)
+                $('#error').show();
+                $('html, body').animate({ scrollTop: $('#succ').offset().top }, 'slow');
             },
         });
         return false;

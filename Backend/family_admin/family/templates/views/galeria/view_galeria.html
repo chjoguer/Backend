@@ -2,23 +2,16 @@
 {% block content %}
 
 
-{% if messages %}
-{% for message in messages %}
-{% if message.tags == "success" %}
-<div class="card mb-4 py-3 border-left-success message">
+<div class="card mb-4 py-3 border-left-success message " id="succ" style="display: none;">
     <div class="card-body ">
-        {{ message }}<a class="del-msg">&times;</a>
+        Guardado Exitoso<a class="del-msg">&times;</a>
     </div>
 </div>
-{% else %}
-<div class="card mb-4 py-3 border-left-danger message">
+<div class="card mb-4 py-3 border-left-danger message "   id="error"style="display: none;">
     <div class="card-body ">
-        <span> {{ message }}</span><a class="del-msg">&times;</a>
+        <span>Error en el guardado</span><a class="del-msg">&times;</a>
     </div>
 </div>
-{% endif %}
-{% endfor %}
-{% endif %}
 
 <div class="card shadow mb-4">
     <!-- Card Header - Dropdown -->
@@ -116,4 +109,10 @@
 
     </div>
   </div>
+<script>
+$(document).ready(function(){
+
+});
+</script>
+
 {% endblock  %}

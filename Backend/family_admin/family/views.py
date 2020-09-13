@@ -60,8 +60,9 @@ def vista_registrar_tema(request):
 
             #Video: Este se muestra una vez que entre en el tema
             vide_tema = Videos_Tema(id_tema=tema)
-            vide_tema.video = request.FILES['video']
-            #vide_tema.save()
+            if bool(request.FILES.get('video')) == True:
+                vide_tema.video = request.FILES['video']
+                #vide_tema.save()
 
 
             #Que suba audio podria ser opcional (Casi a nadie le gusta estar oyendo audio de internet)
@@ -200,6 +201,8 @@ def recuperar_contrasenia(request):
 
 
 def signup(request):
+    if request.user.is_authenticated:
+        return redirect('registrar_tema') 
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -251,7 +254,6 @@ def forgot_password(request):
 
 
 @csrf_exempt
-@login_required(login_url='/')
 def recibir_imagenes(request):
     if request.method == "POST":
         galeria = Galeria.objects.get(id_galeria=1)
@@ -259,10 +261,10 @@ def recibir_imagenes(request):
             imagen = Imagenes_galeria(id_galeria=galeria,image=v)
             imagen.save()
             
+        messages.add_message(request,messages.ERROR,'Creedenciales incorrectas, intentelo de nuevo...')
         return JsonResponse(200,safe=False)
     return JsonResponse(400,safe=False)
     # return redirect('views/galeria/view_galeria.html')
-@login_required(login_url='/')
 def recibir_video(request):
     if request.method == "POST":
         galeria = Galeria.objects.get(id_galeria=1)
@@ -273,7 +275,6 @@ def recibir_video(request):
     return render(request, 'views/galeria/view_galeria.html')
 
 
-@login_required(login_url='/')
 def notificaciones(informacion):
     usuarios = UserProfile.objects.all();
     asunto = 'Actualizacion de contenido Familias Unidas Ec'
